@@ -1,0 +1,324 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Database1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Competition">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CompetitionName" Type="nvarchar" MaxLength="32" Nullable="false" />
+          <Property Name="Country" Type="nvarchar" MaxLength="32" Nullable="false" />
+          <Property Name="City" Type="nvarchar" MaxLength="32" Nullable="false" />
+          <Property Name="Venue" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Continent" Type="nvarchar" MaxLength="16" Nullable="false" />
+          <Property Name="Date" Type="datetime2" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Competitor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CompetitionId" Type="int" Nullable="false" />
+          <Property Name="CompetitorName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="WcaId" Type="nchar" MaxLength="10" />
+          <Property Name="Country" Type="nvarchar" MaxLength="16" Nullable="false" />
+          <Property Name="BirthDate" Type="datetime2" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Event">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="222" Type="bit" Nullable="false" />
+          <Property Name="333" Type="bit" Nullable="false" />
+          <Property Name="444" Type="bit" Nullable="false" />
+          <Property Name="555" Type="bit" Nullable="false" />
+          <Property Name="666" Type="bit" Nullable="false" />
+          <Property Name="777" Type="bit" Nullable="false" />
+          <Property Name="333bld" Type="bit" Nullable="false" />
+          <Property Name="333fmc" Type="bit" Nullable="false" />
+          <Property Name="333oh" Type="bit" Nullable="false" />
+          <Property Name="333feet" Type="bit" Nullable="false" />
+          <Property Name="Clock" Type="bit" Nullable="false" />
+          <Property Name="Mega" Type="bit" Nullable="false" />
+          <Property Name="Pyra" Type="bit" Nullable="false" />
+          <Property Name="Skewb" Type="bit" Nullable="false" />
+          <Property Name="Sq1" Type="bit" Nullable="false" />
+          <Property Name="444bld" Type="bit" Nullable="false" />
+          <Property Name="555bld" Type="bit" Nullable="false" />
+          <Property Name="Multibld" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TableIntermediate">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CompetitorId" Type="int" Nullable="false" />
+          <Property Name="EventId" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="CompetitionFK">
+          <End Role="Competition" Type="Self.Competition" Multiplicity="1" />
+          <End Role="Competitor" Type="Self.Competitor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Competition">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Competitor">
+              <PropertyRef Name="CompetitionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Competitor">
+          <End Role="Competitor" Type="Self.Competitor" Multiplicity="1" />
+          <End Role="TableIntermediate" Type="Self.TableIntermediate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Competitor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TableIntermediate">
+              <PropertyRef Name="CompetitorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Event">
+          <End Role="Event" Type="Self.Event" Multiplicity="1" />
+          <End Role="TableIntermediate" Type="Self.TableIntermediate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Event">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TableIntermediate">
+              <PropertyRef Name="EventId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Database1ModelStoreContainer">
+          <EntitySet Name="Competition" EntityType="Self.Competition" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Competitor" EntityType="Self.Competitor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Event" EntityType="Self.Event" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TableIntermediate" EntityType="Self.TableIntermediate" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="CompetitionFK" Association="Self.CompetitionFK">
+            <End Role="Competition" EntitySet="Competition" />
+            <End Role="Competitor" EntitySet="Competitor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Competitor" Association="Self.FK_Competitor">
+            <End Role="Competitor" EntitySet="Competitor" />
+            <End Role="TableIntermediate" EntitySet="TableIntermediate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Event" Association="Self.FK_Event">
+            <End Role="Event" EntitySet="Event" />
+            <End Role="TableIntermediate" EntitySet="TableIntermediate" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Database1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="Database1Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Competitions" EntityType="Database1Model.Competition" />
+          <EntitySet Name="Competitors" EntityType="Database1Model.Competitor" />
+          <EntitySet Name="Events" EntityType="Database1Model.Event" />
+          <EntitySet Name="TableIntermediates" EntityType="Database1Model.TableIntermediate" />
+          <AssociationSet Name="CompetitionFK" Association="Database1Model.CompetitionFK">
+            <End Role="Competition" EntitySet="Competitions" />
+            <End Role="Competitor" EntitySet="Competitors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Competitor" Association="Database1Model.FK_Competitor">
+            <End Role="Competitor" EntitySet="Competitors" />
+            <End Role="TableIntermediate" EntitySet="TableIntermediates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Event" Association="Database1Model.FK_Event">
+            <End Role="Event" EntitySet="Events" />
+            <End Role="TableIntermediate" EntitySet="TableIntermediates" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Competition">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompetitionName" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="Country" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="Venue" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Continent" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="7" />
+          <NavigationProperty Name="Competitors" Relationship="Database1Model.CompetitionFK" FromRole="Competition" ToRole="Competitor" />
+        </EntityType>
+        <EntityType Name="Competitor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompetitionId" Type="Int32" Nullable="false" />
+          <Property Name="CompetitorName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="WcaId" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Country" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="BirthDate" Type="DateTime" Nullable="false" Precision="7" />
+          <NavigationProperty Name="Competition" Relationship="Database1Model.CompetitionFK" FromRole="Competitor" ToRole="Competition" />
+          <NavigationProperty Name="TableIntermediates" Relationship="Database1Model.FK_Competitor" FromRole="Competitor" ToRole="TableIntermediate" />
+        </EntityType>
+        <EntityType Name="Event">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="C222" Type="Boolean" Nullable="false" />
+          <Property Name="C333" Type="Boolean" Nullable="false" />
+          <Property Name="C444" Type="Boolean" Nullable="false" />
+          <Property Name="C555" Type="Boolean" Nullable="false" />
+          <Property Name="C666" Type="Boolean" Nullable="false" />
+          <Property Name="C777" Type="Boolean" Nullable="false" />
+          <Property Name="C333bld" Type="Boolean" Nullable="false" />
+          <Property Name="C333fmc" Type="Boolean" Nullable="false" />
+          <Property Name="C333oh" Type="Boolean" Nullable="false" />
+          <Property Name="C333feet" Type="Boolean" Nullable="false" />
+          <Property Name="Clock" Type="Boolean" Nullable="false" />
+          <Property Name="Mega" Type="Boolean" Nullable="false" />
+          <Property Name="Pyra" Type="Boolean" Nullable="false" />
+          <Property Name="Skewb" Type="Boolean" Nullable="false" />
+          <Property Name="Sq1" Type="Boolean" Nullable="false" />
+          <Property Name="C444bld" Type="Boolean" Nullable="false" />
+          <Property Name="C555bld" Type="Boolean" Nullable="false" />
+          <Property Name="Multibld" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="TableIntermediates" Relationship="Database1Model.FK_Event" FromRole="Event" ToRole="TableIntermediate" />
+        </EntityType>
+        <EntityType Name="TableIntermediate">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompetitorId" Type="Int32" Nullable="false" />
+          <Property Name="EventId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Competitor" Relationship="Database1Model.FK_Competitor" FromRole="TableIntermediate" ToRole="Competitor" />
+          <NavigationProperty Name="Event" Relationship="Database1Model.FK_Event" FromRole="TableIntermediate" ToRole="Event" />
+        </EntityType>
+        <Association Name="CompetitionFK">
+          <End Type="Database1Model.Competition" Role="Competition" Multiplicity="1" />
+          <End Type="Database1Model.Competitor" Role="Competitor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Competition">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Competitor">
+              <PropertyRef Name="CompetitionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Competitor">
+          <End Type="Database1Model.Competitor" Role="Competitor" Multiplicity="1" />
+          <End Type="Database1Model.TableIntermediate" Role="TableIntermediate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Competitor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TableIntermediate">
+              <PropertyRef Name="CompetitorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Event">
+          <End Type="Database1Model.Event" Role="Event" Multiplicity="1" />
+          <End Type="Database1Model.TableIntermediate" Role="TableIntermediate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Event">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TableIntermediate">
+              <PropertyRef Name="EventId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Database1ModelStoreContainer" CdmEntityContainer="Database1Entities">
+          <EntitySetMapping Name="Competitions">
+            <EntityTypeMapping TypeName="Database1Model.Competition">
+              <MappingFragment StoreEntitySet="Competition">
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Continent" ColumnName="Continent" />
+                <ScalarProperty Name="Venue" ColumnName="Venue" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="CompetitionName" ColumnName="CompetitionName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Competitors">
+            <EntityTypeMapping TypeName="Database1Model.Competitor">
+              <MappingFragment StoreEntitySet="Competitor">
+                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="WcaId" ColumnName="WcaId" />
+                <ScalarProperty Name="CompetitorName" ColumnName="CompetitorName" />
+                <ScalarProperty Name="CompetitionId" ColumnName="CompetitionId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Events">
+            <EntityTypeMapping TypeName="Database1Model.Event">
+              <MappingFragment StoreEntitySet="Event">
+                <ScalarProperty Name="Multibld" ColumnName="Multibld" />
+                <ScalarProperty Name="C555bld" ColumnName="555bld" />
+                <ScalarProperty Name="C444bld" ColumnName="444bld" />
+                <ScalarProperty Name="Sq1" ColumnName="Sq1" />
+                <ScalarProperty Name="Skewb" ColumnName="Skewb" />
+                <ScalarProperty Name="Pyra" ColumnName="Pyra" />
+                <ScalarProperty Name="Mega" ColumnName="Mega" />
+                <ScalarProperty Name="Clock" ColumnName="Clock" />
+                <ScalarProperty Name="C333feet" ColumnName="333feet" />
+                <ScalarProperty Name="C333oh" ColumnName="333oh" />
+                <ScalarProperty Name="C333fmc" ColumnName="333fmc" />
+                <ScalarProperty Name="C333bld" ColumnName="333bld" />
+                <ScalarProperty Name="C777" ColumnName="777" />
+                <ScalarProperty Name="C666" ColumnName="666" />
+                <ScalarProperty Name="C555" ColumnName="555" />
+                <ScalarProperty Name="C444" ColumnName="444" />
+                <ScalarProperty Name="C333" ColumnName="333" />
+                <ScalarProperty Name="C222" ColumnName="222" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TableIntermediates">
+            <EntityTypeMapping TypeName="Database1Model.TableIntermediate">
+              <MappingFragment StoreEntitySet="TableIntermediate">
+                <ScalarProperty Name="EventId" ColumnName="EventId" />
+                <ScalarProperty Name="CompetitorId" ColumnName="CompetitorId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

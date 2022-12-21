@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a6d12a05101f4144ad9051672a5b77e8" Name="Diagram1" ZoomLevel="98">
+        <EntityTypeShape EntityType="Database1Model.Competition" Width="1.5" PointX="0.5" PointY="0.5" />
+        <EntityTypeShape EntityType="Database1Model.Competitor" Width="1.5" PointX="2.5" PointY="0.5" />
+        <EntityTypeShape EntityType="Database1Model.Event" Width="1.5" PointX="4.75" PointY="0.5" />
+        <EntityTypeShape EntityType="Database1Model.TableIntermediate" Width="1.5" PointX="2.75" PointY="3.625" />
+        <AssociationConnector Association="Database1Model.CompetitionFK" />
+        <AssociationConnector Association="Database1Model.FK_Competitor" />
+        <AssociationConnector Association="Database1Model.FK_Event" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
